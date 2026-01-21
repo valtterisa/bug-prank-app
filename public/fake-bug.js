@@ -9,6 +9,7 @@
   const cfg = {
     durationMs: 45000,
     bugSize: 18,
+    spawnDelayMs: [800, 2200],
     panicEveryMs: [6000, 12000],
     panicDurationMs: 450,
     pauseEveryMs: [1200, 2600],
@@ -175,9 +176,11 @@
     setTimeout(stop, cfg.durationMs);
   }
 
+  const begin = () => setTimeout(start, randRange(cfg.spawnDelayMs));
+
   if (document.readyState === "complete" || document.readyState === "interactive") {
-    start();
+    begin();
   } else {
-    window.addEventListener("DOMContentLoaded", start, { once: true });
+    window.addEventListener("DOMContentLoaded", begin, { once: true });
   }
 })();
